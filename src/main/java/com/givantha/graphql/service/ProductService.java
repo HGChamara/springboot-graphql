@@ -22,4 +22,11 @@ public class ProductService {
     public List<Product> getProductsByCategory(String category) {
         return productRepository.findByCategory(category);
     }
+
+    public Product updateStock(int id, int updatedStock) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found : "+id));
+        product.setStock(updatedStock);
+        return productRepository.save(product);
+    }
 }
